@@ -18,5 +18,5 @@ COPY . /app/
 # 6. Expose Port
 EXPOSE 8000
 
-# 7. Start Command: Collect static files first, then start Gunicorn
-CMD ["sh", "-c", "python manage.py collectstatic --noinput && gunicorn core.wsgi:application --bind 0.0.0.0:8000"]
+# 7. Start Command: Migrate DB, collect static files, then start Gunicorn
+CMD ["sh", "-c", "python manage.py migrate && python manage.py collectstatic --noinput && gunicorn core.wsgi:application --bind 0.0.0.0:8000"]
