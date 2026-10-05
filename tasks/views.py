@@ -18,6 +18,9 @@ class TaskViewSet(viewsets.ModelViewSet):
 
     # Only access user's own tasks
     def get_queryset(self):
+        # To prevent AnonymousUser TypeError
+        if getattr(self, 'swagger_fake_view', False):
+            return Task.objects.none()
         return Task.objects.filter(user=self.request.user)
 
     # Assign user automatically when creating task
