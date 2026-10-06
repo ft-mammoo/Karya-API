@@ -9,6 +9,10 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    
+    env:
+      SECRET_KEY: "dummy-secret-key-for-github-actions"
+      DEBUG: "True"
 
     steps:
     - name: Checkout Code
